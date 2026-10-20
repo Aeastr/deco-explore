@@ -29,5 +29,115 @@
     "Explore/Widgets/widgetsHomeScreen": "Explore/Widgets/widgetsHomeScreen.png",
     "Explore/Widgets/widgetsSizeMenuDuoClosed": "Explore/Widgets/widgetsSizeMenuDuoClosed.png",
     "Explore/Widgets/widgetsPickerDuoClosed": "Explore/Widgets/widgetsPickerDuoClosed.png"
+  },
+  "imageSizes": {
+    "Explore/Collaboration/sharingManage.png": {
+      "width": 1104,
+      "height": 2250
+    },
+    "Explore/Collaboration/sharingAutomationConfigure.png": {
+      "width": 1104,
+      "height": 2250
+    },
+    "Explore/Collaboration/sharingShortcutInstall.png": {
+      "width": 1104,
+      "height": 2250
+    },
+    "Explore/Collaboration/sharingInvite.png": {
+      "width": 1104,
+      "height": 2250
+    },
+    "Explore/Collaboration/sharingShortcutActions.png": {
+      "width": 1104,
+      "height": 2250
+    },
+    "Explore/Collaboration/sharingAutomationReady.png": {
+      "width": 1104,
+      "height": 2250
+    },
+    "Explore/Collaboration/sharingShortcutChooseWallpaper.png": {
+      "width": 1104,
+      "height": 2250
+    },
+    "Explore/Collaboration/sharedWallpaper.png": {
+      "width": 2306,
+      "height": 2070
+    },
+    "Explore/Collaboration/sharingAutomationTriggers.png": {
+      "width": 1104,
+      "height": 2250
+    },
+    "Explore/Collaboration/sharingActive.png": {
+      "width": 1104,
+      "height": 2250
+    },
+    "Explore/Layers/layersList.png": {
+      "width": 1104,
+      "height": 2250
+    },
+    "Explore/Layers/layersSelectionBox.png": {
+      "width": 1104,
+      "height": 2250
+    },
+    "Explore/Layers/layersGrouped.png": {
+      "width": 1104,
+      "height": 2250
+    },
+    "Explore/Layers/layersSelected.png": {
+      "width": 1104,
+      "height": 2250
+    },
+    "Explore/Widgets/widgetsEditorDuoClosed.png": {
+      "width": 1182,
+      "height": 1646
+    },
+    "Explore/Widgets/widgetsEditorDuoOpen.png": {
+      "width": 2320,
+      "height": 1686
+    },
+    "Explore/Widgets/widgetsSizeMenu.png": {
+      "width": 1104,
+      "height": 2250
+    },
+    "Explore/Widgets/widgetsPicker.png": {
+      "width": 1104,
+      "height": 2250
+    },
+    "Explore/Widgets/widgetsSizeMenuDuoOpen.png": {
+      "width": 2320,
+      "height": 1686
+    },
+    "Explore/Widgets/widgetsHomeScreenDuoOpen.png": {
+      "width": 2320,
+      "height": 750
+    },
+    "Explore/Widgets/widgetsHomeScreenDuoClosed.png": {
+      "width": 1182,
+      "height": 638
+    },
+    "Explore/Widgets/widgetsEditor.png": {
+      "width": 1104,
+      "height": 2250
+    },
+    "Explore/Widgets/widgetsPickerDuoOpen.png": {
+      "width": 2320,
+      "height": 1686
+    },
+    "Explore/Widgets/widgetsHomeScreen.png": {
+      "width": 1104,
+      "height": 900
+    },
+    "Explore/Widgets/widgetsSizeMenuDuoClosed.png": {
+      "width": 1182,
+      "height": 1646
+    },
+    "Explore/Widgets/widgetsPickerDuoClosed.png": {
+      "width": 1182,
+      "height": 1646
+    },
+    "Media/silver-hearts-star-chain.png": {
+      "width": 353,
+      "height": 767
+    }
   }
 }
