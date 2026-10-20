@@ -1,0 +1,33 @@
+{
+  "locales": [
+    "en"
+  ],
+  "images": {
+    "Explore/Collaboration/sharingManage": "Explore/Collaboration/sharingManage.png",
+    "Explore/Collaboration/sharingAutomationConfigure": "Explore/Collaboration/sharingAutomationConfigure.png",
+    "Explore/Collaboration/sharingShortcutInstall": "Explore/Collaboration/sharingShortcutInstall.png",
+    "Explore/Collaboration/sharingInvite": "Explore/Collaboration/sharingInvite.png",
+    "Explore/Collaboration/sharingShortcutActions": "Explore/Collaboration/sharingShortcutActions.png",
+    "Explore/Collaboration/sharingAutomationReady": "Explore/Collaboration/sharingAutomationReady.png",
+    "Explore/Collaboration/sharingShortcutChooseWallpaper": "Explore/Collaboration/sharingShortcutChooseWallpaper.png",
+    "Explore/Collaboration/sharedWallpaper": "Explore/Collaboration/sharedWallpaper.png",
+    "Explore/Collaboration/sharingAutomationTriggers": "Explore/Collaboration/sharingAutomationTriggers.png",
+    "Explore/Collaboration/sharingActive": "Explore/Collaboration/sharingActive.png",
+    "Explore/Layers/layersList": "Explore/Layers/layersList.png",
+    "Explore/Layers/layersSelectionBox": "Explore/Layers/layersSelectionBox.png",
+    "Explore/Layers/layersGrouped": "Explore/Layers/layersGrouped.png",
+    "Explore/Layers/layersSelected": "Explore/Layers/layersSelected.png",
+    "Explore/Widgets/widgetsEditorDuoClosed": "Explore/Widgets/widgetsEditorDuoClosed.png",
+    "Explore/Widgets/widgetsEditorDuoOpen": "Explore/Widgets/widgetsEditorDuoOpen.png",
+    "Explore/Widgets/widgetsSizeMenu": "Explore/Widgets/widgetsSizeMenu.png",
+    "Explore/Widgets/widgetsPicker": "Explore/Widgets/widgetsPicker.png",
+    "Explore/Widgets/widgetsSizeMenuDuoOpen": "Explore/Widgets/widgetsSizeMenuDuoOpen.png",
+    "Explore/Widgets/widgetsHomeScreenDuoOpen": "Explore/Widgets/widgetsHomeScreenDuoOpen.png",
+    "Explore/Widgets/widgetsHomeScreenDuoClosed": "Explore/Widgets/widgetsHomeScreenDuoClosed.png",
+    "Explore/Widgets/widgetsEditor": "Explore/Widgets/widgetsEditor.png",
+    "Explore/Widgets/widgetsPickerDuoOpen": "Explore/Widgets/widgetsPickerDuoOpen.png",
+    "Explore/Widgets/widgetsHomeScreen": "Explore/Widgets/widgetsHomeScreen.png",
+    "Explore/Widgets/widgetsSizeMenuDuoClosed": "Explore/Widgets/widgetsSizeMenuDuoClosed.png",
+    "Explore/Widgets/widgetsPickerDuoClosed": "Explore/Widgets/widgetsPickerDuoClosed.png"
+  }
+}
