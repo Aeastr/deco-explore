@@ -39,7 +39,7 @@ struct ArticleDocument {
                let source = attributed.runs.first?.imageURL,
                attributed.runs.allSatisfy({ $0.imageURL == source }) {
                 flush()
-                blocks.append(.image(description: String(attributed.characters), source: source.absoluteString.removingPercentEncoding ?? source.absoluteString))
+                blocks.append(.image(description: String(attributed.characters), source: source.absoluteString))
                 continue
             }
             let markers = line.prefix(while: { $0 == "#" }).count
