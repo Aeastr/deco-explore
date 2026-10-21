@@ -13,22 +13,22 @@
     "Explore/Collaboration/sharedWallpaper": "Explore/Collaboration/sharedWallpaper.png",
     "Explore/Collaboration/sharingAutomationTriggers": "Explore/Collaboration/sharingAutomationTriggers.png",
     "Explore/Collaboration/sharingActive": "Explore/Collaboration/sharingActive.png",
-    "Explore/Layers/layersList": "Explore/Layers/layersList.png",
-    "Explore/Layers/layersSelectionBox": "Explore/Layers/layersSelectionBox.png",
-    "Explore/Layers/layersGrouped": "Explore/Layers/layersGrouped.png",
-    "Explore/Layers/layersSelected": "Explore/Layers/layersSelected.png",
-    "Explore/Widgets/widgetsEditorDuoClosed": "Explore/Widgets/widgetsEditorDuoClosed.png",
-    "Explore/Widgets/widgetsEditorDuoOpen": "Explore/Widgets/widgetsEditorDuoOpen.png",
-    "Explore/Widgets/widgetsSizeMenu": "Explore/Widgets/widgetsSizeMenu.png",
-    "Explore/Widgets/widgetsPicker": "Explore/Widgets/widgetsPicker.png",
-    "Explore/Widgets/widgetsSizeMenuDuoOpen": "Explore/Widgets/widgetsSizeMenuDuoOpen.png",
-    "Explore/Widgets/widgetsHomeScreenDuoOpen": "Explore/Widgets/widgetsHomeScreenDuoOpen.png",
-    "Explore/Widgets/widgetsHomeScreenDuoClosed": "Explore/Widgets/widgetsHomeScreenDuoClosed.png",
-    "Explore/Widgets/widgetsEditor": "Explore/Widgets/widgetsEditor.png",
-    "Explore/Widgets/widgetsPickerDuoOpen": "Explore/Widgets/widgetsPickerDuoOpen.png",
-    "Explore/Widgets/widgetsHomeScreen": "Explore/Widgets/widgetsHomeScreen.png",
-    "Explore/Widgets/widgetsSizeMenuDuoClosed": "Explore/Widgets/widgetsSizeMenuDuoClosed.png",
-    "Explore/Widgets/widgetsPickerDuoClosed": "Explore/Widgets/widgetsPickerDuoClosed.png"
+    "Explore/Layers/layersList": "Explore/Layers/layersList.iPhone19-2.png",
+    "Explore/Layers/layersSelectionBox": "Explore/Layers/layersSelectionBox.iPhone19-2.png",
+    "Explore/Layers/layersGrouped": "Explore/Layers/layersGrouped.iPhone19-2.png",
+    "Explore/Layers/layersSelected": "Explore/Layers/layersSelected.iPhone19-2.png",
+    "Explore/Widgets/widgetsEditor.iPhone19-4.closed": "Explore/Widgets/widgetsEditor.iPhone19-4.closed.png",
+    "Explore/Widgets/widgetsEditor.iPhone19-4.open": "Explore/Widgets/widgetsEditor.iPhone19-4.open.png",
+    "Explore/Widgets/widgetsSizeMenu": "Explore/Widgets/widgetsSizeMenu.iPhone19-2.png",
+    "Explore/Widgets/widgetsPicker": "Explore/Widgets/widgetsPicker.iPhone19-2.png",
+    "Explore/Widgets/widgetsSizeMenu.iPhone19-4.open": "Explore/Widgets/widgetsSizeMenu.iPhone19-4.open.png",
+    "Explore/Widgets/widgetsHomeScreen.iPhone19-4.open": "Explore/Widgets/widgetsHomeScreen.iPhone19-4.open.png",
+    "Explore/Widgets/widgetsHomeScreen.iPhone19-4.closed": "Explore/Widgets/widgetsHomeScreen.iPhone19-4.closed.png",
+    "Explore/Widgets/widgetsEditor": "Explore/Widgets/widgetsEditor.iPhone19-2.png",
+    "Explore/Widgets/widgetsPicker.iPhone19-4.open": "Explore/Widgets/widgetsPicker.iPhone19-4.open.png",
+    "Explore/Widgets/widgetsHomeScreen": "Explore/Widgets/widgetsHomeScreen.iPhone19-2.png",
+    "Explore/Widgets/widgetsSizeMenu.iPhone19-4.closed": "Explore/Widgets/widgetsSizeMenu.iPhone19-4.closed.png",
+    "Explore/Widgets/widgetsPicker.iPhone19-4.closed": "Explore/Widgets/widgetsPicker.iPhone19-4.closed.png"
   },
   "imageSizes": {
     "Explore/Collaboration/sharingManage.png": {
@@ -71,67 +71,67 @@
       "width": 1104,
       "height": 2250
     },
-    "Explore/Layers/layersList.png": {
+    "Explore/Layers/layersList.iPhone19-2.png": {
       "width": 1104,
       "height": 2250
     },
-    "Explore/Layers/layersSelectionBox.png": {
+    "Explore/Layers/layersSelectionBox.iPhone19-2.png": {
       "width": 1104,
       "height": 2250
     },
-    "Explore/Layers/layersGrouped.png": {
+    "Explore/Layers/layersGrouped.iPhone19-2.png": {
       "width": 1104,
       "height": 2250
     },
-    "Explore/Layers/layersSelected.png": {
+    "Explore/Layers/layersSelected.iPhone19-2.png": {
       "width": 1104,
       "height": 2250
     },
-    "Explore/Widgets/widgetsEditorDuoClosed.png": {
+    "Explore/Widgets/widgetsEditor.iPhone19-4.closed.png": {
       "width": 1182,
       "height": 1646
     },
-    "Explore/Widgets/widgetsEditorDuoOpen.png": {
+    "Explore/Widgets/widgetsEditor.iPhone19-4.open.png": {
       "width": 2320,
       "height": 1686
     },
-    "Explore/Widgets/widgetsSizeMenu.png": {
+    "Explore/Widgets/widgetsSizeMenu.iPhone19-2.png": {
       "width": 1104,
       "height": 2250
     },
-    "Explore/Widgets/widgetsPicker.png": {
+    "Explore/Widgets/widgetsPicker.iPhone19-2.png": {
       "width": 1104,
       "height": 2250
     },
-    "Explore/Widgets/widgetsSizeMenuDuoOpen.png": {
+    "Explore/Widgets/widgetsSizeMenu.iPhone19-4.open.png": {
       "width": 2320,
       "height": 1686
     },
-    "Explore/Widgets/widgetsHomeScreenDuoOpen.png": {
+    "Explore/Widgets/widgetsHomeScreen.iPhone19-4.open.png": {
       "width": 2320,
       "height": 750
     },
-    "Explore/Widgets/widgetsHomeScreenDuoClosed.png": {
+    "Explore/Widgets/widgetsHomeScreen.iPhone19-4.closed.png": {
       "width": 1182,
       "height": 638
     },
-    "Explore/Widgets/widgetsEditor.png": {
+    "Explore/Widgets/widgetsEditor.iPhone19-2.png": {
       "width": 1104,
       "height": 2250
     },
-    "Explore/Widgets/widgetsPickerDuoOpen.png": {
+    "Explore/Widgets/widgetsPicker.iPhone19-4.open.png": {
       "width": 2320,
       "height": 1686
     },
-    "Explore/Widgets/widgetsHomeScreen.png": {
+    "Explore/Widgets/widgetsHomeScreen.iPhone19-2.png": {
       "width": 1104,
       "height": 900
     },
-    "Explore/Widgets/widgetsSizeMenuDuoClosed.png": {
+    "Explore/Widgets/widgetsSizeMenu.iPhone19-4.closed.png": {
       "width": 1182,
       "height": 1646
     },
-    "Explore/Widgets/widgetsPickerDuoClosed.png": {
+    "Explore/Widgets/widgetsPicker.iPhone19-4.closed.png": {
       "width": 1182,
       "height": 1646
     },

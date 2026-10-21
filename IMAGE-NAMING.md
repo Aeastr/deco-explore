@@ -30,16 +30,32 @@ Articles retain their stable logical reference:
 
 Register the actual PNG path in `manifest.json`, and add its pixel width and height to `imageSizes`. Commit the image and manifest changes together on `main`.
 
-The current app resolves the standard image and the explicit `DuoClosed` and `DuoOpen` manifest aliases. Those aliases can point to files using this naming convention. For example:
+The logical name’s entry in `images` supplies the general fallback. Register additional device captures with a matching model suffix in their keys. The app reads the model and display state from each registered PNG’s filename:
 
 ```json
 {
   "images": {
     "Explore/Widgets/widgetsEditor": "Explore/Widgets/widgetsEditor.iPhone19-2.png",
-    "Explore/Widgets/widgetsEditorDuoClosed": "Explore/Widgets/widgetsEditor.iPhone19-4.closed.png",
-    "Explore/Widgets/widgetsEditorDuoOpen": "Explore/Widgets/widgetsEditor.iPhone19-4.open.png"
+    "Explore/Widgets/widgetsEditor.iPhone19-4.closed": "Explore/Widgets/widgetsEditor.iPhone19-4.closed.png",
+    "Explore/Widgets/widgetsEditor.iPhone19-4.open": "Explore/Widgets/widgetsEditor.iPhone19-4.open.png"
   }
 }
 ```
 
-Model-based automatic selection needs a corresponding app resolver; filenames alone do not enable it. Existing published filenames remain valid. Apply this convention to new device-specific captures, retaining any older file still referenced by a published article or manifest.
+Every registered PNG needs a corresponding `imageSizes` entry, keyed by its complete file path. Keep device captures beside one another under the logical image’s article folder. An unregistered file is not part of the published inventory.
+
+## Selection
+
+The app uses its known hardware model identifier and screen profiles:
+
+1. Choose a capture for the exact model and physical display state.
+2. Otherwise choose the closest known model in the same family and physical display state. Compare portrait-normalized screen proportions first, then pixel area. These are device-screen dimensions from the app’s model profiles, rather than the framed PNG’s dimensions.
+3. Otherwise use the logical name’s general fallback entry.
+
+Conventional iPhones, iPads and Duo are separate families. Duo’s `open` and `closed` captures are separate states. An unknown model can use an exact-model capture; without known screen geometry it uses the general fallback rather than guessing a closest device. A shared image such as `sharedWallpaper.png` needs only its general entry.
+
+When multiple orientations are supplied, conventional iPhones prefer `portrait`; iPads and open Duo prefer `landscape`. An omitted orientation follows the preferred explicit orientation, then the other orientation. Selection stays stable as the reader rotates or resizes the article. Equal device matches use the file path as a deterministic tie breaker.
+
+The same selection resolves artwork and its size metadata. The decoded-image cache includes the reader’s model and physical display state. Published content updates keep the existing revision and offline caching behavior.
+
+Remote Explore first ships in Deco 3.1. The current Widgets and Layers captures use this convention; the manifest uses the model-specific names directly.
