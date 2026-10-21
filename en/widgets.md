@@ -1,10 +1,12 @@
 ## Create a widget
 
-Open **Widgets** and tap ![New Widget](symbol:plus). Choose a background, then add stickers or text in the editor.
+Open **Widgets** and tap ![New Widget](symbol:plus). Choose one or more sizes, then choose a background and add stickers or text in the editor.
 
-Open ![Wallpaper Options](symbol:slider.horizontal.3) → **Size** to choose **Small**, **Medium**, **Large**, or **Extra Large**. Extra Large has separate iPhone portrait and iPad landscape shapes.
+Sizes include **Small**, **Medium**, **Large**, and **Extra Large**. Extra Large has separate iPhone portrait and iPad landscape shapes.
 
-Each size has its own layout. The first time you edit another size, Deco copies your current design as a starting point. You can then move, add or remove stickers and change the background without changing the other sizes. Switching sizes returns to that size’s arrangement.
+Tap the current size in the editor’s toolbar to switch layouts. Open **Manage Sizes…** in that menu to add or remove sizes.
+
+Sizes share an arrangement until you move or change existing artwork or change the background in a particular size. That size then has its own arrangement. Adding or deleting stickers updates every size, including sizes you have already customized.
 
 Tap **Save** to save the widget and its layouts. Widget designs live in **Widgets**; wallpapers live in **Wallpapers**.
 
@@ -18,6 +20,14 @@ Touch and hold the Deco widget, choose **Edit Widget**, and select your design i
 
 ## Change the look
 
-Open your design in Deco’s **Widgets** tab, choose the size you want to change, edit it and save. To display a different design, choose it in **Edit Widget** on your Home Screen.
+Tap a configured Home Screen widget to open its details in Deco, or open your design in the **Widgets** tab. Choose **Edit Widget**, select the size you want to change in the editor’s toolbar, edit it and save. To display a different design, choose it in **Edit Widget** on your Home Screen.
 
-If a widget is unavailable, open Deco and check the design in **Widgets**. You can also use [Settings → Widgets](deco://settings/widgets) → **Refresh Widgets** to refresh the available artwork.
+If your Home Screen widget shows **Add This Size**, open the design in Deco, add that size through **Manage Sizes…**, and save.
+
+If a widget is unavailable, open the design in Deco and save it again. You can also use [Settings → Widgets](deco://settings/widgets) → **Refresh Widgets** to refresh the available widget artwork.
+
+## Share an editable widget
+
+Touch and hold a design in **Widgets** and choose **Export…** to share an editable `.decowidget` file. Widget file export is included with **Deco Plus**.
+
+To import a file, touch and hold ![New Widget](symbol:plus) and choose **Import Widget**, or open a `.decowidget` file from **Files**. The imported design is added to your **Widgets** library as a separate copy.
