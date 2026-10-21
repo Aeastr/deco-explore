@@ -13,7 +13,7 @@ Tap the current size in the editor’s toolbar to switch layouts. Open ![Manage 
 
 Sizes share an arrangement until you move or change existing artwork or change the background in a particular size. That size then has its own arrangement. Adding or deleting stickers updates every size, including sizes you have already customized.
 
-Tap **Save** to save the widget and its layouts. Widget designs live in **Widgets**; wallpapers live in **Wallpapers**.
+Tap ![Save](symbol:checkmark) to save your widget.
 
 ## Put it on your Home Screen
 
