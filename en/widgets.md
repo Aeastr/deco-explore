@@ -2,7 +2,12 @@
 
 Open **Widgets** and tap ![New Widget](symbol:plus). Choose one or more sizes, then choose a background and add stickers or text in the editor.
 
-Sizes include ![Small widget](symbol:widget.small) **Small**, ![Medium widget](symbol:widget.medium) **Medium**, ![Large widget](symbol:widget.large) **Large**, and **Extra Large**. Extra Large has separate ![iPhone portrait widget](symbol:rectangle.portrait) **iPhone** portrait and ![iPad extra-large widget](symbol:widget.extralarge) **iPad** landscape shapes.
+Widgets support these sizes:
+
+- ![Small](symbol:widget.small) **Small**
+- ![Medium](symbol:widget.medium) **Medium**
+- ![Large](symbol:widget.large) **Large**
+- ![Extra Large](symbol:widget.extralarge) **Extra Large**
 
 Tap the current size in the editor’s toolbar to switch layouts. Open ![Manage Sizes](symbol:slider.horizontal.3) **Manage Sizes…** in that menu to add or remove sizes.
 

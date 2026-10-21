@@ -10,6 +10,7 @@ struct ArticleStyle {
     var maximumImageHeight: CGFloat = 620
     var panelInset: CGFloat = 12
     var panelRadius: CGFloat = 30
+    var panelItemAlignment: HorizontalAlignment = .leading
 
     func heading(_ level: Int) -> Font.TextStyle {
         guard !headings.isEmpty else { return .headline }
@@ -40,6 +41,23 @@ struct ArticleRenderer<ImageContent: View, ComponentContent: View>: View {
                         .fixedSize(horizontal: false, vertical: true)
                 case .image(let description, let source):
                     image(description, source)
+                case .panel(let layout, let items):
+                    ArticleTextPanel(layout: layout, items: items, style: style, transformText: transformText)
+                case .bulletList(let items):
+                    VStack(alignment: .leading, spacing: 8) {
+                        ForEach(items.indices, id: \.self) { index in
+                            HStack(alignment: .firstTextBaseline, spacing: 8) {
+                                Text("•")
+                                    .font(.system(style.body, design: style.design))
+                                    .accessibilityHidden(true)
+                                ArticlePanelItem(
+                                    text: transformText(ArticleInlineText.parse(items[index])),
+                                    style: style
+                                )
+                            }
+                            .accessibilityElement(children: .combine)
+                        }
+                    }
                 case .component(let kind, let id):
                     component(kind, id)
                 }
@@ -62,7 +80,9 @@ extension ArticleInlineText {
                 let name = String(url.absoluteString.dropFirst(scheme.count + 1))
                 let image = scheme == "symbol" ? UIImage(systemName: name) : UIImage(named: name)
                 if let image, image.isSymbolImage {
-                    text = Text(Image(uiImage: image)).accessibilityLabel(Text(String(segment.characters)))
+                    let symbol = scheme == "symbol" ? Image(systemName: name) : Image(name)
+                    text = Text(symbol).baselineOffset(0)
+                        .accessibilityLabel(Text(String(segment.characters)))
                     if run.inlinePresentationIntent?.contains(.stronglyEmphasized) == true { text = text.bold() }
                     if run.inlinePresentationIntent?.contains(.emphasized) == true { text = text.italic() }
                 } else {
@@ -106,24 +126,104 @@ extension ArticleInlineText {
     }
 }
 
-/// Apply the same viewport and panel to loaded images and their loading states.
+/// A shared surface for text panels, images and image loading states.
+struct ArticlePanel<Content: View>: View {
+    var style = ArticleStyle()
+    var cut: ArticleImageOptions.Cut = .none
+    @ViewBuilder var content: Content
+
+    var body: some View {
+        content
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.top, cut == .top || cut == .both ? 0 : style.panelInset)
+            .padding(.bottom, cut == .bottom || cut == .both ? 0 : style.panelInset)
+            .padding(.horizontal, style.panelInset)
+            .background(Color(uiColor: .secondarySystemBackground))
+            .clipShape(.rect(cornerRadius: style.panelRadius))
+    }
+}
+
+struct ArticleTextPanel: View {
+    let layout: ArticleDocument.PanelLayout
+    let items: [String]
+    var style = ArticleStyle()
+    var transformText: (AttributedString) -> AttributedString = { $0 }
+    @ScaledMetric(relativeTo: .body) private var minimumColumnWidth: CGFloat = 140
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
+    var body: some View {
+        ArticlePanel(style: style) {
+            LazyVGrid(
+                columns: layout == .grid && !dynamicTypeSize.isAccessibilitySize
+                    ? [GridItem(.adaptive(minimum: minimumColumnWidth), alignment: .leading)]
+                    : [GridItem(.flexible(), alignment: .leading)],
+                alignment: .leading,
+                spacing: style.panelInset
+            ) {
+                ForEach(items.indices, id: \.self) { index in
+                    ArticlePanelItem(
+                        text: transformText(ArticleInlineText.parse(items[index])),
+                        style: style
+                    )
+                        .frame(maxWidth: .infinity, alignment: style.panelItemAlignment == .center ? .center : .leading)
+                        .padding(.vertical, 8)
+                        .padding(.horizontal, 4)
+                }
+            }
+        }
+    }
+}
+
+/// A leading symbol gets the same space in every item, regardless of its shape.
+private struct ArticlePanelItem: View {
+    let text: AttributedString
+    let style: ArticleStyle
+    @ScaledMetric(relativeTo: .body) private var iconWidth: CGFloat = 32
+    @ScaledMetric(relativeTo: .body) private var iconSpacing: CGFloat = 8
+
+    var body: some View {
+        if let parts = symbolAndLabel {
+            HStack(alignment: .firstTextBaseline, spacing: iconSpacing) {
+                ArticleInlineText.text(parts.symbol, style: style)
+                    .frame(width: iconWidth)
+                    .accessibilityHidden(true)
+                ArticleInlineText.text(parts.label, style: style)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        } else {
+            ArticleInlineText.text(text, style: style)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+    }
+
+    private var symbolAndLabel: (symbol: AttributedString, label: AttributedString)? {
+        guard let run = text.runs.first, let url = run.imageURL,
+              let scheme = url.scheme, ["symbol", "symbol-asset"].contains(scheme),
+              run.link == nil else { return nil }
+        let name = String(url.absoluteString.dropFirst(scheme.count + 1))
+        let image = scheme == "symbol" ? UIImage(systemName: name) : UIImage(named: name)
+        guard let image, image.isSymbolImage else { return nil }
+        var label = AttributedString(text[run.range.upperBound...])
+        while label.characters.first?.isWhitespace == true {
+            label.removeSubrange(label.startIndex..<label.characters.index(after: label.startIndex))
+        }
+        guard !label.characters.isEmpty else { return nil }
+        return (AttributedString(text[run.range]), label)
+    }
+}
+
+/// Apply the same panel to loaded images and their loading states.
 struct ArticleImagePanel<Content: View>: View {
     let options: ArticleImageOptions
-    let sourceSize: CGSize
     var style = ArticleStyle()
     @ViewBuilder var content: Content
 
     var body: some View {
-        let sourceRatio = sourceSize.width / max(1, sourceSize.height)
-        let cuts = options.verticalCuts(sourceAspectRatio: Double(sourceRatio))
         Group {
             if options.background == .secondary {
-                content
-                    .padding(.top, cuts.top ? 0 : style.panelInset)
-                    .padding(.bottom, cuts.bottom ? 0 : style.panelInset)
-                    .padding(.horizontal, style.panelInset)
-                    .background(Color(uiColor: .secondarySystemBackground))
-                    .clipShape(.rect(cornerRadius: style.panelRadius))
+                ArticlePanel(style: style, cut: options.cut) {
+                    content
+                }
             } else {
                 content
             }
@@ -134,28 +234,12 @@ struct ArticleImagePanel<Content: View>: View {
 
 struct ArticleImageView: View {
     let image: UIImage
-    let options: ArticleImageOptions
     var style = ArticleStyle()
 
     var body: some View {
-        if let crop = options.crop {
-            GeometryReader { geometry in
-                let scale = max(geometry.size.width / image.size.width, geometry.size.height / image.size.height)
-                let width = image.size.width * scale
-                let height = image.size.height * scale
-                Image(uiImage: image)
-                    .resizable()
-                    .frame(width: width, height: height)
-                    .offset(x: (geometry.size.width - width) * CGFloat(crop.x),
-                            y: (geometry.size.height - height) * CGFloat(crop.y))
-            }
-            .aspectRatio(CGFloat(crop.aspectRatio), contentMode: .fit)
-            .clipped()
-        } else {
-            Image(uiImage: image)
-                .resizable()
-                .scaledToFit()
-                .frame(maxHeight: style.maximumImageHeight)
-        }
+        Image(uiImage: image)
+            .resizable()
+            .scaledToFit()
+            .frame(maxHeight: style.maximumImageHeight)
     }
 }

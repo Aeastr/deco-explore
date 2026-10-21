@@ -2,7 +2,7 @@
 
 Create or open a saved wallpaper that you want to make together. Tap ![Share](symbol:person.badge.plus) and invite a friend. Starting a shared wallpaper requires [Deco Plus](deco://plus/shared-wallpapers), but friends can join and collaborate for free.
 
-![The top of a creation, with the Share button highlighted beside the blue edit button](asset:Explore/Collaboration/sharingInvite#crop=3:1&position=top&background=secondary)
+![The top of a creation, with the Share button highlighted beside the blue edit button](asset:Explore/Collaboration/sharingInvite#background=secondary&cut=bottom)
 
 ## Make room for their ideas
 
@@ -12,7 +12,7 @@ Give your friend editing access if you want them to change the artwork. You can 
 
 Once a wallpaper is shared, tap ![Manage Sharing](symbol:person.2) to manage sharing.
 
-![The top of a shared creation, with the two-person sharing button highlighted](asset:Explore/Collaboration/sharingActive#crop=3:1&position=top&background=secondary)
+![The top of a shared creation, with the two-person sharing button highlighted](asset:Explore/Collaboration/sharingActive#background=secondary&cut=bottom)
 
 For a wallpaper you own, choose **Add Participant** to invite someone else or **Sharing Options** to choose who can access it and whether they can edit. You can also copy the link or stop sharing.
 
@@ -26,7 +26,7 @@ In Deco, open [Settings → Shortcuts](deco://settings/shortcuts) and add **Auto
 
 Choose the shared wallpaper you want to refresh, then tap **Next** and finish setup.
 
-![Configure This Shortcut asks which shared Deco wallpaper to refresh each morning, with Beagle Collage selected in the Wallpaper row](asset:Explore/Collaboration/sharingShortcutChooseWallpaper#crop=3:2&position=top&background=secondary)
+![Configure This Shortcut asks which shared Deco wallpaper to refresh each morning, with Beagle Collage selected in the Wallpaper row](asset:Explore/Collaboration/sharingShortcutChooseWallpaper#background=secondary&cut=bottom)
 
 Check that the **Get** action uses your shared wallpaper and the **Set Wallpaper** action uses the Photos Lock Screen you want to update. Leave the revision and image size fields empty to use the defaults, and keep **Require Latest Version** on.
 

@@ -2,11 +2,17 @@ import Foundation
 
 /// A deliberately small block format. Inline Markdown is parsed by Foundation.
 struct ArticleDocument {
+    enum PanelLayout: String {
+        case grid, stack
+    }
+
     enum Block {
         case heading(Int, String)
         case paragraph(String)
         case image(description: String, source: String)
         case component(kind: String, id: String)
+        case panel(layout: PanelLayout, items: [String])
+        case bulletList([String])
     }
 
     let blocks: [Block]
@@ -19,10 +25,39 @@ struct ArticleDocument {
             blocks.append(.paragraph(paragraph.joined(separator: " ")))
             paragraph.removeAll()
         }
-        for raw in source.components(separatedBy: .newlines) {
-            let line = raw.trimmingCharacters(in: .whitespaces)
+        let lines = source.components(separatedBy: .newlines).map {
+            $0.trimmingCharacters(in: .whitespaces)
+        }
+        var index = 0
+        while index < lines.count {
+            let line = lines[index]
+            index += 1
+            if line.hasPrefix(":::"),
+               let layout = PanelLayout(rawValue: String(line.dropFirst(3))),
+               let end = lines[index...].firstIndex(of: ":::") {
+                let items = lines[index..<end].filter { !$0.isEmpty }
+                // A malformed or nested panel remains readable as ordinary text.
+                flush()
+                if !items.isEmpty, !items.contains(where: { $0.hasPrefix(":::") }) {
+                    blocks.append(.panel(layout: layout, items: items))
+                } else {
+                    blocks.append(.paragraph(lines[(index - 1)...end].joined(separator: " ")))
+                }
+                index = end + 1
+                continue
+            }
             if line.isEmpty {
                 flush()
+                continue
+            }
+            if let item = Self.bulletItem(line) {
+                flush()
+                var items = [item]
+                while index < lines.count, let next = Self.bulletItem(lines[index]) {
+                    items.append(next)
+                    index += 1
+                }
+                blocks.append(.bulletList(items))
                 continue
             }
             if line.hasPrefix("["), line.hasSuffix("]"), let colon = line.firstIndex(of: ":") {
@@ -69,8 +104,17 @@ struct ArticleDocument {
             case .heading(_, let text), .paragraph(let text): String(ArticleInlineText.parse(text).characters)
             case .image(let description, _): description
             case .component(let kind, let id): componentLabel(kind, id)
+            case .panel(_, let items), .bulletList(let items):
+                items.map { String(ArticleInlineText.parse($0).characters) }.joined(separator: " ")
             }
         }.joined(separator: " ")
+    }
+
+    private static func bulletItem(_ line: String) -> String? {
+        guard let marker = line.first, ["-", "*", "+"].contains(marker),
+              line.dropFirst().first == " " || line.dropFirst().first == "\t" else { return nil }
+        let item = line.dropFirst().trimmingCharacters(in: .whitespaces)
+        return item.isEmpty ? nil : item
     }
 }
 
@@ -97,78 +141,35 @@ enum ArticleInlineText {
     }
 }
 
-/// Crop coordinates describe the available overflow, from zero to one.
+/// Images are cropped before publication; only their surrounding panel is authored here.
 struct ArticleImageOptions {
-    struct Crop {
-        let aspectRatio: Double
-        let x: Double
-        let y: Double
-    }
     enum Background { case none, secondary }
     enum Cut { case none, top, bottom, both }
 
-    var crop: Crop?
     var background: Background = .none
     var cut: Cut = .none
 
     static func parse(_ source: String) -> Self {
         guard let hash = source.firstIndex(of: "#") else { return Self() }
-        let fragment = String(source[source.index(after: hash)...])
-        // Preserve existing background-free aliases.
-        if fragment == "top" { return Self(crop: Crop(aspectRatio: 3, x: 0.5, y: 0)) }
-        if fragment == "setup" { return Self(crop: Crop(aspectRatio: 1.5, x: 0.5, y: 0)) }
+        let fragment = source[source.index(after: hash)...]
         var fields: [String: String] = [:]
         for field in fragment.split(separator: "&", omittingEmptySubsequences: false) {
             let pair = field.split(separator: "=", omittingEmptySubsequences: false)
             guard pair.count == 2 else { return Self() }
             let key = String(pair[0])
-            guard ["crop", "position", "background", "cut"].contains(key), fields[key] == nil else { return Self() }
+            guard ["background", "cut"].contains(key), fields[key] == nil else { return Self() }
             fields[key] = String(pair[1])
         }
         guard fields["background"].map({ ["none", "secondary"].contains($0) }) ?? true,
               fields["cut"].map({ ["none", "top", "bottom", "both"].contains($0) }) ?? true else { return Self() }
         var result = Self()
+        result.background = fields["background"] == "secondary" ? .secondary : .none
         switch fields["cut"] {
         case "top": result.cut = .top
         case "bottom": result.cut = .bottom
         case "both": result.cut = .both
         default: break
         }
-        if let ratio = fields["crop"] {
-            let dimensions = ratio.split(separator: ":", omittingEmptySubsequences: false)
-            guard dimensions.count == 2, let w = Double(dimensions[0]), let h = Double(dimensions[1]),
-                  w.isFinite, h.isFinite, w > 0, h > 0, (w / h).isFinite, w / h > 0 else { return Self() }
-            let anchors: [String: (Double, Double)] = [
-                "top-left": (0, 0), "top": (0.5, 0), "top-right": (1, 0),
-                "left": (0, 0.5), "center": (0.5, 0.5), "right": (1, 0.5),
-                "bottom-left": (0, 1), "bottom": (0.5, 1), "bottom-right": (1, 1)
-            ]
-            let position = fields["position"] ?? "center"
-            let point: (Double, Double)
-            if let anchor = anchors[position] {
-                point = anchor
-            } else {
-                let coordinates = position.split(separator: ",", omittingEmptySubsequences: false)
-                guard coordinates.count == 2, let x = Double(coordinates[0]), let y = Double(coordinates[1]),
-                      x.isFinite, y.isFinite, (0...100).contains(x), (0...100).contains(y) else { return Self() }
-                point = (x / 100, y / 100)
-            }
-            result.crop = Crop(aspectRatio: w / h, x: point.0, y: point.1)
-        } else if fields["position"] != nil {
-            return Self()
-        }
-        result.background = fields["background"] == "secondary" || (fields["background"] == nil && result.crop != nil)
-            ? .secondary : .none
         return result
-    }
-
-    func verticalCuts(sourceAspectRatio: Double) -> (top: Bool, bottom: Bool) {
-        var top = cut == .top || cut == .both
-        var bottom = cut == .bottom || cut == .both
-        if let crop, sourceAspectRatio < crop.aspectRatio {
-            top = top || crop.y > 0
-            bottom = bottom || crop.y < 1
-        }
-        return (top, bottom)
     }
 }
